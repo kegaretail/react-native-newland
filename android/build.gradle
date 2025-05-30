@@ -48,8 +48,9 @@ def supportsNamespace() {
 }
 
 android {
+  namespace "nl.kega.newland"
+
   if (supportsNamespace()) {
-    namespace "nl.kega.newland"
 
     sourceSets {
       main {
