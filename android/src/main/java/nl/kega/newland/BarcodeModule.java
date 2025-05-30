@@ -76,11 +76,46 @@ public class BarcodeModule extends ReactContextBaseJavaModule implements Lifecyc
 				IntentFilter filter = new IntentFilter("nlscan.action.SCANNER_RESULT");
 				context.registerReceiver(scanReceiver, filter);
 
-				Intent intent = new Intent("ACTION_BAR_SCANCFG");
-				intent.putExtra("EXTRA_SCAN_POWER", 1);
-				//intent.putExtra("EXTRA_SCAN_NOTY_SND", 0);
+				Intent scannerIntent = new Intent("ACTION_BAR_SCANCFG");
+				scannerIntent.putExtra("EXTRA_SCAN_POWER", 1);
+				scannerIntent.putExtra("EXTRA_SCAN_NOTY_SND", 1);
 
-				context.sendBroadcast(intent);
+				context.sendBroadcast(scannerIntent);
+
+				if (config != null) {
+					
+					if (config.hasKey("types")) {
+						ReadableArray types = config.getArray("types");
+
+						for (String barcodeType : BarcodeTypes.VALID_CODE_IDS) {
+							Intent barcodeIntent = new Intent ("ACTION_BARCODE_CFG");
+							barcodeIntent.putExtra("CODE_ID", barcodeType);
+							barcodeIntent.putExtra("PROPERTY", "Enable");
+							barcodeIntent.putExtra("VALUE", "0");
+							
+							context.sendBroadcast(barcodeIntent);
+
+						}
+						
+						// Enable only specified types
+						if (types != null && types.size() > 0) {
+							for (int i = 0; i < types.size(); i++) {
+								String barcodeType = types.getString(i);
+								log("barcodeType enable " + barcodeType);
+
+								if (barcodeType.equalsIgnoreCase("QR")) {
+									Intent barcodeIntent = new Intent ("ACTION_BARCODE_CFG");
+									barcodeIntent.putExtra("CODE_ID", "QR");
+									barcodeIntent.putExtra("PROPERTY", "Enable");
+									barcodeIntent.putExtra("VALUE", "1");
+
+									context.sendBroadcast(barcodeIntent);
+								}
+							}
+						}
+					}
+
+				}
 
 				isEnabled = true;
 				reading = true;

@@ -132,6 +132,65 @@ public class BarcodeTypes {
         return new HashMap<>(BARCODE_TYPE_MAP);
     }
       /**
+     * All valid Newland CODE_ID values for barcode configuration
+     */
+    public static final String[] VALID_CODE_IDS = {
+        // 1D Linear Barcodes
+        "CODE128",     // Code 128
+        "UCCEAN128",   // GS1-128 (UCC/EAN-128)
+        "AIM128",      // AIM 128
+        "EAN8",        // EAN-8
+        "EAN13",       // EAN-13
+        "ISSN",        // ISSN
+        "ISBN",        // ISBN
+        "UPCE",        // UPC-E
+        "UPCA",        // UPC-A
+        "ITF",         // Interleaved 2 of 5
+        "ITF6",        // ITF-6
+        "ITF14",       // ITF-14
+        "MATRIX25",    // Matrix 2 of 5
+        "IND25",       // Industrial 25
+        "STD25",       // Standard 25
+        "CODE39",      // Code 39
+        "CODABAR",     // Codabar
+        "CODE93",      // Code 93
+        "CODE11",      // Code 11
+        "PLSY",        // Plessey
+        "MSIPLSY",     // MSI-Plessey
+        "RSS",         // RSS
+
+        // 2D Matrix Barcodes
+        "PDF417",      // PDF417
+        "QR",          // QR Code
+        "DM",          // Data Matrix
+        "CSC",         // Chinese Sensible (CS) Code
+        "AZTEC",       // Aztec
+        "MICROPDF",    // MicroPDF417
+        "MICROQR"      // Micro QR
+    };
+    
+    /**
+     * Validates if a CODE_ID is supported by Newland devices
+     * @param codeId The CODE_ID string to validate
+     * @return true if valid, false otherwise
+     */
+    public static boolean isValidCodeId(String codeId) {
+        if (codeId == null || codeId.trim().isEmpty()) {
+            return false;
+        }
+
+        String typeToCheck = codeId.trim().toUpperCase();
+        
+        for (String validType : VALID_CODE_IDS) {
+            if (validType.equals(typeToCheck)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    /**
      * Get barcode category based on type ID
      * @param typeId The numeric symbology ID
      * @return Category string (1D, 2D, Postal, etc.)
