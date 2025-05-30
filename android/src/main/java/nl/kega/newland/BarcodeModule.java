@@ -39,7 +39,9 @@ public class BarcodeModule extends ReactContextBaseJavaModule implements Lifecyc
         this.context = reactContext;
         reactContext.addLifecycleEventListener(this);
 
-		if (android.os.Build.MANUFACTURER.equalsIgnoreCase("Newland") ) {	
+		log("BarcodeModule initialized " + android.os.Build.MANUFACTURER + ' ' + android.os.Build.MANUFACTURER.equalsIgnoreCase("Newland"));
+
+		if (android.os.Build.MANUFACTURER.equalsIgnoreCase("Newland")) {	
 			scanReceiver = new BroadcastReceiver() {
 				@Override
 				public void onReceive(Context context, Intent intent) {				
@@ -67,7 +69,7 @@ public class BarcodeModule extends ReactContextBaseJavaModule implements Lifecyc
 
 	@ReactMethod
     public void read(ReadableMap config) {
-		log("Starting barcode scan");
+		log("Starting barcode scan " + scanReceiver);
 		try {
 			if (scanReceiver != null) {
 
@@ -75,7 +77,8 @@ public class BarcodeModule extends ReactContextBaseJavaModule implements Lifecyc
 				context.registerReceiver(scanReceiver, filter);
 
 				Intent intent = new Intent("ACTION_BAR_SCANCFG");
-				intent.putExtra("EXTRA_SCAN_NOTY_SND", 0);
+				intent.putExtra("EXTRA_SCAN_POWER", 1);
+				//intent.putExtra("EXTRA_SCAN_NOTY_SND", 0);
 
 				context.sendBroadcast(intent);
 
@@ -90,11 +93,11 @@ public class BarcodeModule extends ReactContextBaseJavaModule implements Lifecyc
 	@ReactMethod
     public void release() {
 		log("Releasing barcode scanner");
-		disable();
+
 		if (scanReceiver != null) {
 			try {
 				context.unregisterReceiver(scanReceiver);
-
+				isEnabled = false;
 				reading = false;
 			} catch (Exception e) {
 				log("Error unregistering receiver: " + e.getMessage());
