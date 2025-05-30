@@ -92,7 +92,7 @@ public class BarcodeModule extends ReactContextBaseJavaModule implements Lifecyc
 							barcodeIntent.putExtra("CODE_ID", barcodeType);
 							barcodeIntent.putExtra("PROPERTY", "Enable");
 							barcodeIntent.putExtra("VALUE", "0");
-							
+
 							context.sendBroadcast(barcodeIntent);
 
 						}
@@ -103,7 +103,7 @@ public class BarcodeModule extends ReactContextBaseJavaModule implements Lifecyc
 								String barcodeType = types.getString(i);
 								log("barcodeType enable " + barcodeType);
 
-								if (barcodeType.equalsIgnoreCase("QR")) {
+								if (barcodeType.equalsIgnoreCase("QR") || barcodeType.equalsIgnoreCase("qrcode")) {
 									Intent barcodeIntent = new Intent ("ACTION_BARCODE_CFG");
 									barcodeIntent.putExtra("CODE_ID", "QR");
 									barcodeIntent.putExtra("PROPERTY", "Enable");
