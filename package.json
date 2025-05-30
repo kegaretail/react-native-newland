@@ -1,6 +1,6 @@
 {
     "name": "react-native-newland",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "React Native library for Newland barcode scanners",
     "main": "./index.js",
     "scripts": {
