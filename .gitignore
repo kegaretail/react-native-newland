@@ -1,0 +1,29 @@
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+
+
+# Android/IJ
+#
+.classpath
+.cxx
+.gradle
+.idea
+.project
+.settings
+local.properties
+android.iml
+
+android/build/
+
+# Turborepo
+.turbo/
+
+# React Native Codegen
+ios/generated
+android/generated
+
+# React Native Nitro Modules
+nitrogen/

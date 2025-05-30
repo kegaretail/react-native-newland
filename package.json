@@ -1,0 +1,43 @@
+{
+    "name": "react-native-newland",
+    "version": "0.2.0",
+    "description": "React Native library for Newland barcode scanners",
+    "main": "./index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "react-native",
+        "newland",
+        "barcode",
+        "scanner",
+        "android",
+        "pda"
+    ],
+    "author": {
+        "name": "timhonders",
+        "email": "tim.honders@kega.nl"
+    },
+    "maintainers": [
+        {
+            "name": "timhonders",
+            "email": "tim.honders@kega.nl"
+        }
+    ],
+    "license": "ISC",
+    "homepage": "https://github.com/kegaretail/react-native-newland",
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/kegaretail/react-native-newland.git"
+    },
+    "peerDependencies": {
+        "react": "*",
+        "react-native": "*"
+    },
+    "files": [
+        "lib/",
+        "android/",
+        "index.js",
+        "README.md"
+    ]
+}
